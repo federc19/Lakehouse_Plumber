@@ -1501,4 +1501,5 @@ def _discover_yaml_files_with_include(pipelines_dir: Path, include_patterns: Lis
 
 
 if __name__ == "__main__":
+    print("Running LakehousePlumber CLI...")
     cli()

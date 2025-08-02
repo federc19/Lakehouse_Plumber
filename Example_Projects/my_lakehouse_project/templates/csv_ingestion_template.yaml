@@ -28,60 +28,60 @@ parameters:
 
 
 actions:
-  - name: load_{{ table_name }}_csv
-    type: load
-    readMode : "stream"
-    # Natural YAML array format (was JSON string)
-    operational_metadata:
-      - "_source_file_path"
-      - "_processing_timestamp"
-      - "_source_file_modification_time"
-      - "_source_file_size"
-      - "_record_hash"
-    source:
-      type: cloudfiles
-      path: "{landing_volume}/{{ landing_folder }}/*.csv"
-      format: csv
-      # Natural YAML object format (was JSON string)
-      options:
-        cloudFiles.format: csv
-        header: "True"
-        delimiter: ","
-        cloudFiles.maxFilesPerTrigger: "11"
-        cloudFiles.inferColumnTypes: "False"
-        cloudFiles.schemaEvolutionMode: addNewColumns
-        cloudFiles.rescuedDataColumn: _rescued_data
-        cloudFiles.schemaHints: "schemas/{{ table_name }}_schema.yaml"
-
-    target: v_{{ table_name }}_cloudfiles
-    description: "Load {{ table_name }} CSV files from landing volume"
-
-  # - name: load_nation_custom_python
+  # - name: load_{{ table_name }}_csv
   #   type: load
-  #   readMode: batch
-  #   operational_metadata: ["_record_hash"]
+  #   readMode : "stream"
+  #   # Natural YAML array format (was JSON string)
+  #   operational_metadata:
+  #     - "_source_file_path"
+  #     - "_processing_timestamp"
+  #     - "_source_file_modification_time"
+  #     - "_source_file_size"
+  #     - "_record_hash"
   #   source:
-  #     type: python
-  #     module_path: "functions.get_table_watermark"
-  #     function_name: "update_table_metadata"
-  #     parameters:
-  #       target_table: "{{ table_name }}"
-  #   target: nation_custom_python_data
-  #   description: "Load nation data using custom Python extractor"
+  #     type: cloudfiles
+  #     path: "{landing_volume}/{{ landing_folder }}/*.csv"
+  #     format: csv
+  #     # Natural YAML object format (was JSON string)
+  #     options:
+  #       cloudFiles.format: csv
+  #       header: "True"
+  #       delimiter: ","
+  #       cloudFiles.maxFilesPerTrigger: "11"
+  #       cloudFiles.inferColumnTypes: "False"
+  #       cloudFiles.schemaEvolutionMode: addNewColumns
+  #       cloudFiles.rescuedDataColumn: _rescued_data
+  #       cloudFiles.schemaHints: "schemas/{{ table_name }}_schema.yaml"
 
-  - name: resolve_watermark
-    type: transform
-    transform_type: python
+  #   target: v_{{ table_name }}_cloudfiles
+  #   description: "Load {{ table_name }} CSV files from landing volume"
+
+  - name: load_nation_custom_python
+    type: load
     readMode: batch
+    operational_metadata: ["_record_hash"]
     source:
-      source1: v_{{ table_name }}_cloudfiles
       type: python
       module_path: "functions.get_table_watermark"
       function_name: "update_table_metadata"
       parameters:
         target_table: "{{ table_name }}"
-    target: v_{{ table_name }}_cloudfiles_watermark
+    target: nation_custom_python_data
     description: "Load nation data using custom Python extractor"
+
+  # - name: resolve_watermark
+  #   type: transform
+  #   transform_type: python
+  #   readMode: batch
+  #   source:
+  #     source1: v_{{ table_name }}_cloudfiles
+  #     type: python
+  #     module_path: "functions.get_table_watermark"
+  #     function_name: "update_table_metadata"
+  #     parameters:
+  #       target_table: "{{ table_name }}"
+  #   target: v_{{ table_name }}_cloudfiles_watermark
+  #   description: "Load nation data using custom Python extractor"
 
   # - name: resolve_watermark
   #   type: transform

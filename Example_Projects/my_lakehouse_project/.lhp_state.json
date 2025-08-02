@@ -1,20 +1,104 @@
 {
   "environments": {
     "dev": {
-      "generated\\bronze_load\\nation_bronze.py": {
-        "checksum": "f3e6a021bd9987bc6a47f9b7b03187c22613b5373016a11b04aae6a07615ec86",
+      "generated\\bronze_load\\custom_python_functions\\__init__.py": {
+        "checksum": "97919132b602270e72ad4aefe2ee5485e863f63e2fb2d1adc6c83c6ea22d26ed",
         "environment": "dev",
-        "file_composite_checksum": "8749292ff4166b74882e517bf88da32c702adf7e91a308593ad6f6ba75b7ac0f",
+        "file_composite_checksum": "48da7491b50695559271661a2f03d12938c53285eebd73d4b7a9a4ed71d2afaa",
+        "file_dependencies": {},
+        "flowgroup": "nation_bronze",
+        "generated_path": "generated\\bronze_load\\custom_python_functions\\__init__.py",
+        "pipeline": "bronze_load",
+        "source_yaml": "pipelines\\02_bronze\\nation_bronze.yaml",
+        "source_yaml_checksum": "caf8a9b92be5e1c525e342b1688aaabe6463163e61b9ee3f6ff3840413bacd61",
+        "timestamp": "2025-08-02T13:29:50.958867"
+      },
+      "generated\\bronze_load\\custom_python_functions\\nation_transforms.py": {
+        "checksum": "0454891b763c16fc4b1920fb4decb28ba62c38c6b4374a272331527054d8e9ec",
+        "environment": "dev",
+        "file_composite_checksum": "48da7491b50695559271661a2f03d12938c53285eebd73d4b7a9a4ed71d2afaa",
+        "file_dependencies": {},
+        "flowgroup": "nation_bronze",
+        "generated_path": "generated\\bronze_load\\custom_python_functions\\nation_transforms.py",
+        "pipeline": "bronze_load",
+        "source_yaml": "pipelines\\02_bronze\\nation_bronze.yaml",
+        "source_yaml_checksum": "caf8a9b92be5e1c525e342b1688aaabe6463163e61b9ee3f6ff3840413bacd61",
+        "timestamp": "2025-08-02T13:29:50.966012"
+      },
+      "generated\\bronze_load\\custom_python_functions\\transformations_nation_transforms.py": {
+        "checksum": "0454891b763c16fc4b1920fb4decb28ba62c38c6b4374a272331527054d8e9ec",
+        "environment": "dev",
+        "file_composite_checksum": "48da7491b50695559271661a2f03d12938c53285eebd73d4b7a9a4ed71d2afaa",
+        "file_dependencies": {},
+        "flowgroup": "nation_bronze",
+        "generated_path": "generated\\bronze_load\\custom_python_functions\\transformations_nation_transforms.py",
+        "pipeline": "bronze_load",
+        "source_yaml": "pipelines\\02_bronze\\nation_bronze.yaml",
+        "source_yaml_checksum": "caf8a9b92be5e1c525e342b1688aaabe6463163e61b9ee3f6ff3840413bacd61",
+        "timestamp": "2025-08-02T13:28:37.038219"
+      },
+      "generated\\bronze_load\\nation_bronze.py": {
+        "checksum": "ae85bec3ccd59ed0c64c9eed261952832f193428784abfb0ada64ea79af36478",
+        "environment": "dev",
+        "file_composite_checksum": "48da7491b50695559271661a2f03d12938c53285eebd73d4b7a9a4ed71d2afaa",
         "file_dependencies": {},
         "flowgroup": "nation_bronze",
         "generated_path": "generated\\bronze_load\\nation_bronze.py",
         "pipeline": "bronze_load",
         "source_yaml": "pipelines\\02_bronze\\nation_bronze.yaml",
-        "source_yaml_checksum": "4afd106b0ad0b825466f5e9f8c6ab49aa04fc026ca7ac87045561487ddc77136",
-        "timestamp": "2025-08-02T12:13:28.302879"
+        "source_yaml_checksum": "caf8a9b92be5e1c525e342b1688aaabe6463163e61b9ee3f6ff3840413bacd61",
+        "timestamp": "2025-08-02T13:46:12.618256"
+      },
+      "generated\\bronze_load\\transformations\\__init__.py": {
+        "checksum": "97919132b602270e72ad4aefe2ee5485e863f63e2fb2d1adc6c83c6ea22d26ed",
+        "environment": "dev",
+        "file_composite_checksum": "48da7491b50695559271661a2f03d12938c53285eebd73d4b7a9a4ed71d2afaa",
+        "file_dependencies": {},
+        "flowgroup": "nation_bronze",
+        "generated_path": "generated\\bronze_load\\transformations\\__init__.py",
+        "pipeline": "bronze_load",
+        "source_yaml": "pipelines\\02_bronze\\nation_bronze.yaml",
+        "source_yaml_checksum": "caf8a9b92be5e1c525e342b1688aaabe6463163e61b9ee3f6ff3840413bacd61",
+        "timestamp": "2025-08-02T13:44:59.530959"
+      },
+      "generated\\bronze_load\\transformations\\nation_transforms.py": {
+        "checksum": "0454891b763c16fc4b1920fb4decb28ba62c38c6b4374a272331527054d8e9ec",
+        "environment": "dev",
+        "file_composite_checksum": "48da7491b50695559271661a2f03d12938c53285eebd73d4b7a9a4ed71d2afaa",
+        "file_dependencies": {},
+        "flowgroup": "nation_bronze",
+        "generated_path": "generated\\bronze_load\\transformations\\nation_transforms.py",
+        "pipeline": "bronze_load",
+        "source_yaml": "pipelines\\02_bronze\\nation_bronze.yaml",
+        "source_yaml_checksum": "caf8a9b92be5e1c525e342b1688aaabe6463163e61b9ee3f6ff3840413bacd61",
+        "timestamp": "2025-08-02T13:46:12.590645"
+      },
+      "generated\\raw_ingestions\\functions\\__init__.py": {
+        "checksum": "97919132b602270e72ad4aefe2ee5485e863f63e2fb2d1adc6c83c6ea22d26ed",
+        "environment": "dev",
+        "file_composite_checksum": "49954291f945b1b56d41e8e0d4fbeefdce8972e6cbe1e4c74e3d4be5f920baca",
+        "file_dependencies": {},
+        "flowgroup": "nation_ingestion_custom_python",
+        "generated_path": "generated\\raw_ingestions\\functions\\__init__.py",
+        "pipeline": "raw_ingestions",
+        "source_yaml": "pipelines\\01_raw_ingestion\\custom_ingestion\\nation_ingestion.yaml",
+        "source_yaml_checksum": "4236df1ed310c666a872438e667fa0916cb0a51205255af44f0aa2097dccce19",
+        "timestamp": "2025-08-02T13:44:59.575805"
+      },
+      "generated\\raw_ingestions\\functions\\get_nation.py": {
+        "checksum": "80a06848b5d7d3e806f8cad1e15c2f20aacf14563a981fa527a5af3821048035",
+        "environment": "dev",
+        "file_composite_checksum": "49954291f945b1b56d41e8e0d4fbeefdce8972e6cbe1e4c74e3d4be5f920baca",
+        "file_dependencies": {},
+        "flowgroup": "nation_ingestion_custom_python",
+        "generated_path": "generated\\raw_ingestions\\functions\\get_nation.py",
+        "pipeline": "raw_ingestions",
+        "source_yaml": "pipelines\\01_raw_ingestion\\custom_ingestion\\nation_ingestion.yaml",
+        "source_yaml_checksum": "4236df1ed310c666a872438e667fa0916cb0a51205255af44f0aa2097dccce19",
+        "timestamp": "2025-08-02T13:46:04.235243"
       },
       "generated\\raw_ingestions\\nation_ingestion_custom_python.py": {
-        "checksum": "9508ec4adcf94d3ff1271dfd0e28ea9b9a5a603c36e2a31b29859a53cff7af91",
+        "checksum": "c887067a1376e1cb69e3ed52c9a0d6426d7a3c4a2a2cf6bd3ae9bf5e66094d31",
         "environment": "dev",
         "file_composite_checksum": "49954291f945b1b56d41e8e0d4fbeefdce8972e6cbe1e4c74e3d4be5f920baca",
         "file_dependencies": {},
@@ -23,7 +107,7 @@
         "pipeline": "raw_ingestions",
         "source_yaml": "pipelines\\01_raw_ingestion\\custom_ingestion\\nation_ingestion.yaml",
         "source_yaml_checksum": "4236df1ed310c666a872438e667fa0916cb0a51205255af44f0aa2097dccce19",
-        "timestamp": "2025-08-02T12:13:28.329922"
+        "timestamp": "2025-08-02T13:46:04.242967"
       }
     }
   },
@@ -43,6 +127,6 @@
       }
     }
   },
-  "last_updated": "2025-08-02T12:13:28.329922",
+  "last_updated": "2025-08-02T13:46:12.620255",
   "version": "1.0"
 }

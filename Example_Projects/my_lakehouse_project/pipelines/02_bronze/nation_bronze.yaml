@@ -5,25 +5,34 @@ pipeline: bronze_load
 # there are used to group actions together in the generated files
 flowgroup: nation_bronze
 
-actions: 
-  - name: load_nation_custom_python
+actions:
+  - name: nation_raw_load
     type: load
-    readMode: batch
-    operational_metadata: ["_record_hash"]
+    operational_metadata: ["_processing_timestamp"]
+    readMode: stream
     source:
-      type: python
-      module_path: "functions/get_nation.py"
-      function_name: "get_nation_data"
-      parameters:
-        batch_size: 1000
-        start_date: "2023-01-01"
-    target: nation_custom_python_data
+      type: delta
+      database: "{catalog}.{raw_schema}"
+      table: nation
+    target: v_nation_raw
+    description: "Load nation table from raw schema" 
+
+  - name: enrich_df
+    type: transform
+    transform_type: python
+    source: v_nation_raw
+    module_path: "transformations/nation_transforms.py"
+    function_name: "enrich_nation_data"
+    parameters:
+      enrich_value: "enrikesidoooooo"
+    target: v_nation_raw_riki
+    readMode: batch
     description: "Load nation data using custom Python extractor"
 
-  - name: write_nation_custom_python_data
+  - name: write_nation_bronze
     type: write
-    source: nation_custom_python_data
+    source: v_nation_raw_riki
     write_target:
-      type: materialized_view
-      database: "{catalog}.{raw_schema}"
-      table: "nation_custom_python"
+      type: streaming_table
+      database: "{catalog}.{bronze_schema}"
+      table: "nation"

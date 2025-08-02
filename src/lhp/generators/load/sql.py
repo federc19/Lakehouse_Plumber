@@ -95,6 +95,6 @@ class SQLLoadGenerator(BaseActionGenerator):
                     file_type="SQL file",
                 )
 
-            return sql_file.read_text().strip()
+            return sql_file.read_text(encoding='utf-8').strip()
         else:
             raise ValueError("SQL source must have 'sql' or 'sql_path'")

@@ -1,60 +1,48 @@
-2025-08-02 12:13:28,206 - __main__ - INFO - Logging initialized - File: C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\.lhp\logs\lhp.log, Console level: WARNING
-2025-08-02 12:13:28,206 - lhp.core.template_engine - INFO - Loading 1 templates from C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\templates
-2025-08-02 12:13:28,218 - lhp.core.template_engine - DEBUG - Loaded template: csv_ingestion_template
-2025-08-02 12:13:28,221 - lhp.core.project_config_loader - INFO - Loaded project configuration from C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\lhp.yaml
-2025-08-02 12:13:28,221 - lhp.core.orchestrator - INFO - Initialized ActionOrchestrator with project root: C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project
-2025-08-02 12:13:28,221 - lhp.core.orchestrator - INFO - Loaded project configuration: my_lakehouse_project v1.0
-2025-08-02 12:13:28,221 - lhp.core.template_engine - INFO - Loading 1 templates from C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\templates
-2025-08-02 12:13:28,225 - lhp.core.template_engine - DEBUG - Loaded template: csv_ingestion_template
-2025-08-02 12:13:28,232 - lhp.core.state_manager - INFO - Loaded state from C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\.lhp_state.json
-2025-08-02 12:13:28,244 - lhp.core.orchestrator - DEBUG - Discovered flowgroup: nation_ingestion_custom_python (pipeline: raw_ingestions) in C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\pipelines\01_raw_ingestion\custom_ingestion\nation_ingestion.yaml
-2025-08-02 12:13:28,246 - lhp.core.orchestrator - DEBUG - Discovered flowgroup: nation_bronze (pipeline: bronze_load) in C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\pipelines\02_bronze\nation_bronze.yaml
-2025-08-02 12:13:28,248 - lhp.core.project_config_loader - INFO - Loaded project configuration from C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\lhp.yaml
-2025-08-02 12:13:28,255 - lhp.core.state_manager - DEBUG - Substitution file changed for dev
-2025-08-02 12:13:28,256 - lhp.core.state_manager - DEBUG - Substitution file changed for dev
-2025-08-02 12:13:28,256 - lhp.core.state_manager - DEBUG - Global dependencies changed for dev - marking all files as stale
-2025-08-02 12:13:28,260 - lhp.core.project_config_loader - INFO - Loaded project configuration from C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\lhp.yaml
-2025-08-02 12:13:28,264 - lhp.core.state_manager - DEBUG - Substitution file changed for dev
-2025-08-02 12:13:28,264 - lhp.core.state_manager - DEBUG - Global dependencies changed for dev - marking all files as stale
-2025-08-02 12:13:28,268 - lhp.core.project_config_loader - INFO - Loaded project configuration from C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\lhp.yaml
-2025-08-02 12:13:28,269 - lhp.core.orchestrator - INFO - Starting pipeline generation by field: bronze_load for env: dev
-2025-08-02 12:13:28,275 - lhp.core.orchestrator - DEBUG - Discovered flowgroup: nation_ingestion_custom_python (pipeline: raw_ingestions) in C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\pipelines\01_raw_ingestion\custom_ingestion\nation_ingestion.yaml
-2025-08-02 12:13:28,276 - lhp.core.orchestrator - DEBUG - Discovered flowgroup: nation_bronze (pipeline: bronze_load) in C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\pipelines\02_bronze\nation_bronze.yaml
-2025-08-02 12:13:28,276 - lhp.core.orchestrator - DEBUG - Found flowgroup 'nation_bronze' for pipeline 'bronze_load'
-2025-08-02 12:13:28,278 - lhp.core.orchestrator - DEBUG - Discovered flowgroup: nation_ingestion_custom_python (pipeline: raw_ingestions) in C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\pipelines\01_raw_ingestion\custom_ingestion\nation_ingestion.yaml
-2025-08-02 12:13:28,280 - lhp.core.orchestrator - DEBUG - Discovered flowgroup: nation_bronze (pipeline: bronze_load) in C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\pipelines\02_bronze\nation_bronze.yaml
-2025-08-02 12:13:28,281 - lhp.core.state_manager - DEBUG - Substitution file changed for dev
-2025-08-02 12:13:28,281 - lhp.core.state_manager - DEBUG - Global dependencies changed for dev - marking all files as stale
-2025-08-02 12:13:28,284 - lhp.core.project_config_loader - INFO - Loaded project configuration from C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\lhp.yaml
-2025-08-02 12:13:28,289 - lhp.core.orchestrator - INFO - Smart generation: processing 1/2 flowgroups
-2025-08-02 12:13:28,289 - lhp.core.orchestrator - INFO - Processing flowgroup: nation_bronze
-2025-08-02 12:13:28,301 - lhp.utils.smart_file_writer - INFO - Generated: C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\generated\bronze_load\nation_bronze.py
-2025-08-02 12:13:28,302 - lhp.core.state_dependency_resolver - DEBUG - Resolved 0 dependencies for pipelines\02_bronze\nation_bronze.yaml
-2025-08-02 12:13:28,302 - lhp.core.state_manager - DEBUG - Updated global dependencies for environment: dev
-2025-08-02 12:13:28,302 - lhp.core.state_manager - DEBUG - Tracked generated file: generated\bronze_load\nation_bronze.py from pipelines\02_bronze\nation_bronze.yaml with 0 dependencies
-2025-08-02 12:13:28,302 - lhp.core.orchestrator - INFO - Generated: C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\generated\bronze_load\nation_bronze.py
-2025-08-02 12:13:28,302 - lhp.core.state_manager - DEBUG - Saved state to C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\.lhp_state.json
-2025-08-02 12:13:28,302 - lhp.core.orchestrator - INFO - Pipeline generation complete: bronze_load
-2025-08-02 12:13:28,302 - lhp.core.orchestrator - INFO - Starting pipeline generation by field: raw_ingestions for env: dev
-2025-08-02 12:13:28,302 - lhp.core.orchestrator - DEBUG - Discovered flowgroup: nation_ingestion_custom_python (pipeline: raw_ingestions) in C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\pipelines\01_raw_ingestion\custom_ingestion\nation_ingestion.yaml
-2025-08-02 12:13:28,309 - lhp.core.orchestrator - DEBUG - Discovered flowgroup: nation_bronze (pipeline: bronze_load) in C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\pipelines\02_bronze\nation_bronze.yaml
-2025-08-02 12:13:28,310 - lhp.core.orchestrator - DEBUG - Found flowgroup 'nation_ingestion_custom_python' for pipeline 'raw_ingestions'
-2025-08-02 12:13:28,312 - lhp.core.orchestrator - DEBUG - Discovered flowgroup: nation_ingestion_custom_python (pipeline: raw_ingestions) in C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\pipelines\01_raw_ingestion\custom_ingestion\nation_ingestion.yaml
-2025-08-02 12:13:28,313 - lhp.core.orchestrator - DEBUG - Discovered flowgroup: nation_bronze (pipeline: bronze_load) in C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\pipelines\02_bronze\nation_bronze.yaml
-2025-08-02 12:13:28,314 - lhp.core.state_manager - DEBUG - Substitution file changed for dev
-2025-08-02 12:13:28,314 - lhp.core.state_manager - DEBUG - Global dependencies changed for dev - marking all files as stale
-2025-08-02 12:13:28,318 - lhp.core.project_config_loader - INFO - Loaded project configuration from C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\lhp.yaml
-2025-08-02 12:13:28,318 - lhp.core.state_manager - DEBUG - Substitution file changed for dev
-2025-08-02 12:13:28,318 - lhp.core.orchestrator - INFO - Global dependency changes detected: ['Substitution file (substitutions/dev.yaml) changed']
-2025-08-02 12:13:28,318 - lhp.core.orchestrator - DEBUG - File generated\raw_ingestions\nation_ingestion_custom_python.py is stale due to: ['Substitution file (substitutions/dev.yaml) changed']
-2025-08-02 12:13:28,318 - lhp.core.orchestrator - INFO - Smart generation: processing 1/2 flowgroups
-2025-08-02 12:13:28,318 - lhp.core.orchestrator - INFO - Processing flowgroup: nation_ingestion_custom_python
-2025-08-02 12:13:28,329 - lhp.utils.smart_file_writer - DEBUG - Skipping C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\generated\raw_ingestions\nation_ingestion_custom_python.py (no changes)
-2025-08-02 12:13:28,329 - lhp.core.state_dependency_resolver - DEBUG - Resolved 0 dependencies for pipelines\01_raw_ingestion\custom_ingestion\nation_ingestion.yaml
-2025-08-02 12:13:28,329 - lhp.core.state_manager - DEBUG - Updated global dependencies for environment: dev
-2025-08-02 12:13:28,329 - lhp.core.state_manager - DEBUG - Tracked generated file: generated\raw_ingestions\nation_ingestion_custom_python.py from pipelines\01_raw_ingestion\custom_ingestion\nation_ingestion.yaml with 0 dependencies
-2025-08-02 12:13:28,329 - lhp.core.orchestrator - INFO - Generated: C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\generated\raw_ingestions\nation_ingestion_custom_python.py
-2025-08-02 12:13:28,329 - lhp.core.state_manager - DEBUG - Saved state to C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\.lhp_state.json
-2025-08-02 12:13:28,329 - lhp.core.orchestrator - INFO - Pipeline generation complete: raw_ingestions
-2025-08-02 12:13:28,329 - lhp.core.state_manager - DEBUG - Saved state to C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\.lhp_state.json
-2025-08-02 12:13:28,329 - lhp.utils.bundle_detection - DEBUG - Bundle support disabled - no databricks.yml found in C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project
+2025-08-02 13:46:12,485 - __main__ - INFO - Logging initialized - File: C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\.lhp\logs\lhp.log, Console level: WARNING
+2025-08-02 13:46:12,491 - lhp.core.template_engine - INFO - Loading 1 templates from C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\templates
+2025-08-02 13:46:12,495 - lhp.core.template_engine - DEBUG - Loaded template: csv_ingestion_template
+2025-08-02 13:46:12,496 - lhp.core.project_config_loader - INFO - Loaded project configuration from C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\lhp.yaml
+2025-08-02 13:46:12,500 - lhp.core.orchestrator - INFO - Initialized ActionOrchestrator with project root: C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project
+2025-08-02 13:46:12,500 - lhp.core.orchestrator - INFO - Loaded project configuration: my_lakehouse_project v1.0
+2025-08-02 13:46:12,500 - lhp.core.template_engine - INFO - Loading 1 templates from C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\templates
+2025-08-02 13:46:12,502 - lhp.core.template_engine - DEBUG - Loaded template: csv_ingestion_template
+2025-08-02 13:46:12,516 - lhp.core.state_manager - INFO - Loaded state from C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\.lhp_state.json
+2025-08-02 13:46:12,519 - lhp.core.orchestrator - DEBUG - Discovered flowgroup: nation_ingestion_custom_python (pipeline: raw_ingestions) in C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\pipelines\01_raw_ingestion\custom_ingestion\nation_ingestion.yaml
+2025-08-02 13:46:12,522 - lhp.core.orchestrator - DEBUG - Discovered flowgroup: nation_bronze (pipeline: bronze_load) in C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\pipelines\02_bronze\nation_bronze.yaml
+2025-08-02 13:46:12,527 - lhp.core.project_config_loader - INFO - Loaded project configuration from C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\lhp.yaml
+2025-08-02 13:46:12,542 - lhp.core.state_manager - DEBUG - Substitution file changed for dev
+2025-08-02 13:46:12,542 - lhp.core.state_manager - DEBUG - Substitution file changed for dev
+2025-08-02 13:46:12,542 - lhp.core.state_manager - DEBUG - Global dependencies changed for dev - marking all files as stale
+2025-08-02 13:46:12,542 - lhp.core.project_config_loader - INFO - Loaded project configuration from C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\lhp.yaml
+2025-08-02 13:46:12,556 - lhp.core.orchestrator - INFO - Starting pipeline generation by field: bronze_load for env: dev
+2025-08-02 13:46:12,556 - lhp.core.orchestrator - DEBUG - Discovered flowgroup: nation_ingestion_custom_python (pipeline: raw_ingestions) in C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\pipelines\01_raw_ingestion\custom_ingestion\nation_ingestion.yaml
+2025-08-02 13:46:12,556 - lhp.core.orchestrator - DEBUG - Discovered flowgroup: nation_bronze (pipeline: bronze_load) in C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\pipelines\02_bronze\nation_bronze.yaml
+2025-08-02 13:46:12,556 - lhp.core.orchestrator - DEBUG - Found flowgroup 'nation_bronze' for pipeline 'bronze_load'
+2025-08-02 13:46:12,564 - lhp.core.orchestrator - DEBUG - Discovered flowgroup: nation_ingestion_custom_python (pipeline: raw_ingestions) in C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\pipelines\01_raw_ingestion\custom_ingestion\nation_ingestion.yaml
+2025-08-02 13:46:12,566 - lhp.core.orchestrator - DEBUG - Discovered flowgroup: nation_bronze (pipeline: bronze_load) in C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\pipelines\02_bronze\nation_bronze.yaml
+2025-08-02 13:46:12,566 - lhp.core.state_manager - DEBUG - Substitution file changed for dev
+2025-08-02 13:46:12,566 - lhp.core.state_manager - DEBUG - Global dependencies changed for dev - marking all files as stale
+2025-08-02 13:46:12,570 - lhp.core.project_config_loader - INFO - Loaded project configuration from C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\lhp.yaml
+2025-08-02 13:46:12,572 - lhp.core.state_manager - DEBUG - Substitution file changed for dev
+2025-08-02 13:46:12,576 - lhp.core.orchestrator - INFO - Global dependency changes detected: ['Substitution file (substitutions/dev.yaml) changed']
+2025-08-02 13:46:12,576 - lhp.core.orchestrator - DEBUG - File generated\bronze_load\custom_python_functions\__init__.py is stale due to: ['Substitution file (substitutions/dev.yaml) changed']
+2025-08-02 13:46:12,576 - lhp.core.orchestrator - DEBUG - File generated\bronze_load\custom_python_functions\nation_transforms.py is stale due to: ['Substitution file (substitutions/dev.yaml) changed']
+2025-08-02 13:46:12,576 - lhp.core.orchestrator - DEBUG - File generated\bronze_load\custom_python_functions\transformations_nation_transforms.py is stale due to: ['Substitution file (substitutions/dev.yaml) changed']
+2025-08-02 13:46:12,576 - lhp.core.orchestrator - DEBUG - File generated\bronze_load\nation_bronze.py is stale due to: ['Substitution file (substitutions/dev.yaml) changed']
+2025-08-02 13:46:12,576 - lhp.core.orchestrator - DEBUG - File generated\bronze_load\transformations\__init__.py is stale due to: ['Substitution file (substitutions/dev.yaml) changed']
+2025-08-02 13:46:12,576 - lhp.core.orchestrator - DEBUG - File generated\bronze_load\transformations\nation_transforms.py is stale due to: ['Substitution file (substitutions/dev.yaml) changed']
+2025-08-02 13:46:12,576 - lhp.core.orchestrator - INFO - Smart generation: processing 1/2 flowgroups
+2025-08-02 13:46:12,576 - lhp.core.orchestrator - INFO - Processing flowgroup: nation_bronze
+2025-08-02 13:46:12,585 - lhp.utils.python_file_manager - INFO - Copied C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\transformations\nation_transforms.py to C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\generated\bronze_load\transformations\nation_transforms.py
+2025-08-02 13:46:12,589 - lhp.core.state_dependency_resolver - DEBUG - Resolved 0 dependencies for pipelines\02_bronze\nation_bronze.yaml
+2025-08-02 13:46:12,590 - lhp.core.state_manager - DEBUG - Updated global dependencies for environment: dev
+2025-08-02 13:46:12,590 - lhp.core.state_manager - DEBUG - Tracked generated file: generated\bronze_load\transformations\nation_transforms.py from pipelines\02_bronze\nation_bronze.yaml with 0 dependencies
+2025-08-02 13:46:12,606 - lhp.utils.smart_file_writer - DEBUG - Skipping C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\generated\bronze_load\nation_bronze.py (no changes)
+2025-08-02 13:46:12,618 - lhp.core.state_dependency_resolver - DEBUG - Resolved 0 dependencies for pipelines\02_bronze\nation_bronze.yaml
+2025-08-02 13:46:12,618 - lhp.core.state_manager - DEBUG - Updated global dependencies for environment: dev
+2025-08-02 13:46:12,618 - lhp.core.state_manager - DEBUG - Tracked generated file: generated\bronze_load\nation_bronze.py from pipelines\02_bronze\nation_bronze.yaml with 0 dependencies
+2025-08-02 13:46:12,618 - lhp.core.orchestrator - INFO - Generated: C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\generated\bronze_load\nation_bronze.py
+2025-08-02 13:46:12,619 - lhp.core.state_manager - DEBUG - Saved state to C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\.lhp_state.json
+2025-08-02 13:46:12,619 - lhp.core.orchestrator - INFO - Pipeline generation complete: bronze_load
+2025-08-02 13:46:12,620 - lhp.core.state_manager - DEBUG - Saved state to C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project\.lhp_state.json
+2025-08-02 13:46:12,620 - lhp.utils.bundle_detection - DEBUG - Bundle support disabled - no databricks.yml found in C:\Users\FedAguirre\Fed_AA\Learning\MDDF-CURSOR\Lakehouse_Plumber\Example_Projects\my_lakehouse_project

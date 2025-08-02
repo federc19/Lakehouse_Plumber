@@ -4,6 +4,7 @@ import shutil
 from pathlib import Path
 from ...core.base_generator import BaseActionGenerator
 from ...models.config import Action
+from ...utils.python_file_manager import PythonFileManager
 
 
 class PythonTransformGenerator(BaseActionGenerator):
@@ -27,7 +28,7 @@ class PythonTransformGenerator(BaseActionGenerator):
 
         # Resolve and copy Python file
         project_root = context.get("spec_dir") or Path.cwd()
-        copied_module_name = self._copy_python_file(module_path, project_root, context)
+        copied_module_name = self._copy_python_file_with_utility(module_path, project_root, context)
 
         # Determine source view(s) from action.source directly
         source_views = self._extract_source_views_from_action_source(action.source)
@@ -82,9 +83,46 @@ class PythonTransformGenerator(BaseActionGenerator):
         }
 
         # Add import for the copied module
-        self.add_import(f"from custom_python_functions.{copied_module_name} import {function_name}")
+        # Convert module_path to import path (replace slashes with dots, remove .py extension)
+        import_path = str(Path(module_path).with_suffix('')).replace('/', '.').replace('\\', '.')
+        self.add_import(f"from {import_path} import {function_name}")
 
         return self.render_template("transform/python.py.j2", template_context)
+
+    def _copy_python_file_with_utility(self, module_path: str, project_root: Path, context: dict) -> str:
+        """Copy Python file using the shared utility and return module name."""
+        # Extract module name from path (strip .py extension)
+        base_module_name = Path(module_path).stem
+        
+        # Check for naming conflicts and add prefix if needed
+        module_name = self._resolve_module_name_conflicts(
+            module_path, base_module_name, context
+        )
+        
+        # Use the shared utility to copy the file
+        output_dir = context.get("output_dir", Path.cwd())
+        if output_dir is None:
+            # For dry-run mode, use a temporary directory
+            import tempfile
+            output_dir = Path(tempfile.mkdtemp())
+            
+        flowgroup = context.get("flowgroup")
+        state_manager = context.get("state_manager")
+        source_yaml = context.get("source_yaml")
+        environment = context.get("environment", "unknown")
+        
+        file_manager = PythonFileManager(project_root)
+        copied_files = file_manager.copy_python_file_with_structure(
+            module_path=module_path,
+            output_dir=output_dir,
+            state_manager=state_manager,
+            source_yaml=source_yaml,
+            environment=environment,
+            pipeline=flowgroup.pipeline if flowgroup else "",
+            flowgroup=flowgroup.flowgroup if flowgroup else ""
+        )
+        
+        return module_name
 
     def _extract_source_views_from_action_source(self, source) -> list:
         """Extract source view names from action.source field."""
@@ -98,7 +136,7 @@ class PythonTransformGenerator(BaseActionGenerator):
             raise ValueError("Python transform source must be a string or list of strings")
 
     def _copy_python_file(self, module_path: str, project_root: Path, context: dict) -> str:
-        """Copy Python file to custom_python_functions directory and return module name."""
+        """Copy Python file to directory structure matching module_path and return module name."""
         # Resolve source file path relative to project root
         source_file = project_root / module_path
         
@@ -107,6 +145,9 @@ class PythonTransformGenerator(BaseActionGenerator):
         
         # Extract module name from path (strip .py extension)
         base_module_name = Path(module_path).stem
+        
+        # Extract directory path from module_path
+        module_dir = Path(module_path).parent
         
         # Check for naming conflicts and add prefix if needed
         module_name = self._resolve_module_name_conflicts(
@@ -118,24 +159,26 @@ class PythonTransformGenerator(BaseActionGenerator):
         if not flowgroup:
             raise ValueError("Flowgroup context required for Python file copying")
             
-        # Create custom_python_functions directory structure
+        # Create directory structure matching module_path
         output_dir = context.get("output_dir", Path.cwd())
         if output_dir is None:
             # For dry-run mode, use a temporary directory
             import tempfile
             output_dir = Path(tempfile.mkdtemp())
-        custom_functions_dir = output_dir / "custom_python_functions"
-        custom_functions_dir.mkdir(parents=True, exist_ok=True)
         
-        # Create __init__.py file
-        init_file = custom_functions_dir / "__init__.py"
-        init_file.write_text("# Generated package for custom Python functions\n")
+        # Create the directory structure matching the module_path
+        functions_dir = output_dir / module_dir
+        functions_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Create __init__.py file in the directory
+        init_file = functions_dir / "__init__.py"
+        init_file.write_text("# Generated package for custom Python functions\n", encoding='utf-8')
         
         # Copy the Python file with header (use resolved module name)
-        dest_file = custom_functions_dir / f"{module_name}.py"
+        dest_file = functions_dir / f"{module_name}.py"
         
         # Add header to copied file
-        original_content = source_file.read_text()
+        original_content = source_file.read_text(encoding='utf-8')
         header = f"""# ╔══════════════════════════════════════════════════════════════════════════════╗
 # ║                                    WARNING                                   ║
 # ║                          DO NOT EDIT THIS FILE DIRECTLY                      ║
@@ -150,7 +193,7 @@ class PythonTransformGenerator(BaseActionGenerator):
 # ╚══════════════════════════════════════════════════════════════════════════════╝
 
 """
-        dest_file.write_text(header + original_content)
+        dest_file.write_text(header + original_content, encoding='utf-8')
         
         # Track additional files with state manager if available
         state_manager = context.get("state_manager")
@@ -194,8 +237,10 @@ class PythonTransformGenerator(BaseActionGenerator):
             # For dry-run mode, no conflict resolution needed
             return base_module_name
             
-        custom_functions_dir = output_dir / "custom_python_functions"
-        potential_conflict_file = custom_functions_dir / f"{base_module_name}.py"
+        # Use the directory structure from module_path
+        module_dir = Path(module_path).parent
+        functions_dir = output_dir / module_dir
+        potential_conflict_file = functions_dir / f"{base_module_name}.py"
         
         # If no existing file, no conflict
         if not potential_conflict_file.exists():
@@ -205,8 +250,8 @@ class PythonTransformGenerator(BaseActionGenerator):
         source_file = context.get("spec_dir", Path.cwd()) / module_path
         if source_file.exists():
             try:
-                existing_content = potential_conflict_file.read_text()
-                new_content = source_file.read_text()
+                existing_content = potential_conflict_file.read_text(encoding='utf-8')
+                new_content = source_file.read_text(encoding='utf-8')
                 
                 # If content matches (ignoring warning header), it's the same file
                 existing_without_header = self._remove_warning_header(existing_content)

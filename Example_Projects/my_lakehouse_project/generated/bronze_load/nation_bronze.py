@@ -2,10 +2,8 @@
 # Pipeline: bronze_load
 # FlowGroup: nation_bronze
 
-from functions/get_nation.py import get_nation_data
-from pyspark.sql import DataFrame
 from pyspark.sql import functions as F
-from pyspark.sql.functions import hash
+from transformations.nation_transforms import enrich_nation_data
 import dlt
 
 # Pipeline Configuration
@@ -17,14 +15,31 @@ FLOWGROUP_ID = "nation_bronze"
 # ============================================================================
 
 @dlt.view()
-def nation_custom_python_data():
-    """Load nation data using custom Python extractor"""
-    # Call the external Python function with spark and parameters
-    parameters = {"batch_size": 1000, "start_date": "2023-01-01"}
-    df = get_nation_data(spark, parameters)
+def v_nation_raw():
+    """Load nation table from raw schema"""
+    df = spark.readStream \
+        .table("fed_dev_catalog.dev_raw_schema.nation")
 
     # Add operational metadata columns
-    df = df.withColumn('_record_hash', F.xxhash64(*[F.col(c) for c in df.columns]))
+    df = df.withColumn('_processing_timestamp', F.current_timestamp())
+
+    return df
+
+
+# ============================================================================
+# TRANSFORMATION VIEWS
+# ============================================================================
+
+@dlt.view()
+def v_nation_raw_riki():
+    """Load nation data using custom Python extractor"""
+    # Load source view(s)
+    v_nation_raw_df = spark.read.table("v_nation_raw")
+
+    # Apply Python transformation
+    parameters = {"enrich_value": "enrikesidoooooo"}
+    df = enrich_nation_data(v_nation_raw_df, spark, parameters)
+
 
     return df
 
@@ -33,13 +48,21 @@ def nation_custom_python_data():
 # TARGET TABLES
 # ============================================================================
 
-@dlt.table(
-    name="fed_dev_catalog.dev_raw_schema.nation_custom_python",
-    comment="Materialized view: nation_custom_python",
-    table_properties={})
-def nation_custom_python():
-    """Write to fed_dev_catalog.dev_raw_schema.nation_custom_python from multiple sources"""
-    # Materialized views use batch processing
-    df = spark.read.table("nation_custom_python_data")
+# Create the streaming table
+dlt.create_streaming_table(
+    name="fed_dev_catalog.dev_bronze_schema.nation",
+    comment="Streaming table: nation")
+
+
+# Define append flow(s)
+@dlt.append_flow(
+    target="fed_dev_catalog.dev_bronze_schema.nation",
+    name="f_nation_bronze",
+    comment="Append flow to fed_dev_catalog.dev_bronze_schema.nation"
+)
+def f_nation_bronze():
+    """Append flow to fed_dev_catalog.dev_bronze_schema.nation"""
+    # Streaming flow
+    df = spark.readStream.table("v_nation_raw_riki")
 
     return df

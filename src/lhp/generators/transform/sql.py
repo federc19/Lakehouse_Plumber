@@ -77,7 +77,7 @@ class SQLTransformGenerator(BaseActionGenerator):
             if not sql_file.exists():
                 raise FileNotFoundError(f"SQL file not found: {sql_file}")
 
-            return sql_file.read_text().strip()
+            return sql_file.read_text(encoding='utf-8').strip()
         else:
             raise ValueError(f"SQL transform '{action.name}' must have sql or sql_path")
 

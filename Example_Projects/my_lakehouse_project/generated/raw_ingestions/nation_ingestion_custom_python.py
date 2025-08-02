@@ -2,7 +2,7 @@
 # Pipeline: raw_ingestions
 # FlowGroup: nation_ingestion_custom_python
 
-from functions/get_nation.py import get_nation_data
+from functions.get_nation import get_nation_data
 from pyspark.sql import DataFrame
 from pyspark.sql import functions as F
 from pyspark.sql.functions import hash

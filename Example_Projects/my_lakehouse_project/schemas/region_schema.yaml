@@ -1,0 +1,19 @@
+# This schema is used to define the region table schema
+# It is used for the schema_hint column of autoloader to override the inferred schema
+name: region
+version: "1.0"
+description: "Region dimension table schema"
+
+columns:
+  - name: r_regionkey
+    type: BIGINT
+    nullable: false
+    comment: "Region key - primary identifier"
+  - name: r_name
+    type: STRING
+    nullable: false
+    comment: "Region name"
+  - name: r_comment
+    type: STRING
+    nullable: true
+    comment: "Optional comment about the region"

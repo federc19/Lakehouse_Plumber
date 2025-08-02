@@ -1,0 +1,18 @@
+dev:
+  env: dev
+  catalog: fed_dev_catalog
+  landing_volume: /Volumes/{catalog}/{raw_schema}/landing_volume
+  raw_schema: dev_raw_schema
+  bronze_schema: dev_bronze_schema
+  silver_schema: dev_silver_schema
+  gold_schema: dev_gold_schema
+
+# Secret configuration
+secrets:
+  default_scope: fed-dev-secrets
+  scopes:
+    database: fed-dev-secrets
+
+prefix_suffix:
+  prefix: prefix_
+  suffix: _v99

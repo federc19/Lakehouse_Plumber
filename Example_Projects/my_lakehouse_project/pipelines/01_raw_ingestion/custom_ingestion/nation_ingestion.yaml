@@ -1,0 +1,29 @@
+# This pipeline is used to ingest the nation table from the csv files into the raw schema
+# Pipeline variable puts the generate files in the same folder for the pipeline to pick up
+pipeline: raw_ingestions
+# Flowgroup are conceptual artifacts and has no functional purpose
+# there are used to group actions together in the generated files
+flowgroup: nation_ingestion_custom_python
+
+actions: 
+  - name: load_nation_custom_python
+    type: load
+    readMode: batch
+    operational_metadata: ["_record_hash"]
+    source:
+      type: python
+      module_path: "functions/get_nation.py"
+      function_name: "get_nation_data"
+      parameters:
+        batch_size: 1000
+        start_date: "2023-01-01"
+    target: nation_custom_python_data
+    description: "Load nation data using custom Python extractor"
+
+  - name: write_nation_custom_python_data
+    type: write
+    source: nation_custom_python_data
+    write_target:
+      type: materialized_view
+      database: "{catalog}.{raw_schema}"
+      table: "nation_custom_python"

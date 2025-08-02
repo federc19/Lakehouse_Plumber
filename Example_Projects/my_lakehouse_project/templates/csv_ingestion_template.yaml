@@ -1,0 +1,107 @@
+# This is a template for ingesting CSV files with schema enforcement
+# It is used to generate the actions for the pipeline
+# within the pipeline all it need to defined are the parameters for the table name and landing folder
+# the template will generate the actions for the pipeline
+
+name: csv_ingestion_template
+version: "1.0"
+description: "Standard template for ingesting CSV files with schema enforcement"
+
+presets:
+  - bronze_layer
+
+parameters:
+  - name: table_name
+    required: true
+    description: "Name of the table to ingest"
+  - name: landing_folder
+    required: true
+    description: "Name of the landing folder"
+  - name: table_properties
+    required: false
+    description: "Optional table properties as key-value pairs"
+    default: {}
+  - name: cluster_columns
+    required: false
+    description: "Optional Liquid clustering columns"
+    default: []
+
+
+actions:
+  - name: load_{{ table_name }}_csv
+    type: load
+    readMode : "stream"
+    # Natural YAML array format (was JSON string)
+    operational_metadata:
+      - "_source_file_path"
+      - "_processing_timestamp"
+      - "_source_file_modification_time"
+      - "_source_file_size"
+      - "_record_hash"
+    source:
+      type: cloudfiles
+      path: "{landing_volume}/{{ landing_folder }}/*.csv"
+      format: csv
+      # Natural YAML object format (was JSON string)
+      options:
+        cloudFiles.format: csv
+        header: "True"
+        delimiter: ","
+        cloudFiles.maxFilesPerTrigger: "11"
+        cloudFiles.inferColumnTypes: "False"
+        cloudFiles.schemaEvolutionMode: addNewColumns
+        cloudFiles.rescuedDataColumn: _rescued_data
+        cloudFiles.schemaHints: "schemas/{{ table_name }}_schema.yaml"
+
+    target: v_{{ table_name }}_cloudfiles
+    description: "Load {{ table_name }} CSV files from landing volume"
+
+  # - name: load_nation_custom_python
+  #   type: load
+  #   readMode: batch
+  #   operational_metadata: ["_record_hash"]
+  #   source:
+  #     type: python
+  #     module_path: "functions.get_table_watermark"
+  #     function_name: "update_table_metadata"
+  #     parameters:
+  #       target_table: "{{ table_name }}"
+  #   target: nation_custom_python_data
+  #   description: "Load nation data using custom Python extractor"
+
+  - name: resolve_watermark
+    type: transform
+    transform_type: python
+    readMode: batch
+    source:
+      source1: v_{{ table_name }}_cloudfiles
+      type: python
+      module_path: "functions.get_table_watermark"
+      function_name: "update_table_metadata"
+      parameters:
+        target_table: "{{ table_name }}"
+    target: v_{{ table_name }}_cloudfiles_watermark
+    description: "Load nation data using custom Python extractor"
+
+  # - name: resolve_watermark
+  #   type: transform
+  #   transform_type: python
+  #   source: v_{{ table_name }}_cloudfiles
+  #   module_path: "functions.get_table_watermark"
+  #   function_name: "update_table_metadata"
+  #   parameters:
+  #     target_table: "{{ table_name }}"
+  #   target: v_{{ table_name }}_cloudfiles_watermark
+  #   readMode: batch
+  #   description: "Load nation data using custom Python extractor"
+
+  - name: write_{{ table_name }}_cloudfiles
+    type: write
+    source: v_{{ table_name }}_cloudfiles_watermark
+    write_target:
+      type: streaming_table
+      database: "{catalog}.{raw_schema}"
+      table: "{{ table_name }}"
+      cluster_columns: "{{ cluster_columns }}"
+      description: "Write {{ table_name }} to raw layer" 
+      table_properties: "{{ table_properties }}"

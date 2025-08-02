@@ -66,15 +66,28 @@ dlt.create_streaming_table(
 
 
 # Define append flow(s)
-# Single source - direct append flow
-@dlt.append_flow(
-    target="fed_dev_catalog.dev_bronze_schema.nation",
-    name="f_nation_bronze",
-    comment="Append flow to fed_dev_catalog.dev_bronze_schema.nation"
-)
-def f_nation_bronze():
-    """Append flow to fed_dev_catalog.dev_bronze_schema.nation"""
-    # Streaming flow
-    df = spark.readStream.table("v_nation_raw_riki")
+# Multiple sources - using for loop approach
+flows = [
+    {"name": "f_nation_bronze_1", "source": "v_nation_raw_riki", "once": False},
+    {"name": "f_nation_bronze_2", "source": "v_nation_raw_db", "once": False},
+]
 
-    return df
+for flow in flows:
+    def create_flow(name, source, once=False):
+        @dlt.append_flow(
+            target="fed_dev_catalog.dev_bronze_schema.nation",
+            name=name,
+            comment="Append flow to fed_dev_catalog.dev_bronze_schema.nation from " + source
+        )
+        def flow_func():
+            """Streaming flow"""
+            if once:
+                # One-time flow (backfill)
+                df = spark.read.table(source)
+            else:
+                # Streaming flow
+                df = spark.readStream.table(source)
+            return df
+        return flow_func
+
+    create_flow(flow["name"], flow["source"], flow["once"])

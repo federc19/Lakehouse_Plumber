@@ -42,7 +42,9 @@ actions:
 
   - name: write_nation_bronze
     type: write
-    source: v_nation_raw_riki
+    source:
+      - v_nation_raw_riki
+      - v_nation_raw_db
     write_target:
       type: streaming_table
       database: "{catalog}.{bronze_schema}"

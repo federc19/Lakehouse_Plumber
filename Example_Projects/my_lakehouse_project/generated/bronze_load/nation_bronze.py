@@ -25,6 +25,17 @@ def v_nation_raw():
 
     return df
 
+@dlt.view()
+def v_nation_raw_db():
+    """Load nation table from raw schema"""
+    df = spark.readStream \
+        .table("fed_dev_catalog.dev_raw_schema.nation")
+
+    # Add operational metadata columns
+    df = df.withColumn('_processing_timestamp', F.current_timestamp())
+
+    return df
+
 
 # ============================================================================
 # TRANSFORMATION VIEWS
@@ -34,7 +45,7 @@ def v_nation_raw():
 def v_nation_raw_riki():
     """Load nation data using custom Python extractor"""
     # Load source view(s)
-    v_nation_raw_df = spark.read.table("v_nation_raw")
+    v_nation_raw_df = spark.readStream.table("v_nation_raw")
 
     # Apply Python transformation
     parameters = {"enrich_value": "enrikesidoooooo"}
@@ -55,6 +66,7 @@ dlt.create_streaming_table(
 
 
 # Define append flow(s)
+# Single source - direct append flow
 @dlt.append_flow(
     target="fed_dev_catalog.dev_bronze_schema.nation",
     name="f_nation_bronze",

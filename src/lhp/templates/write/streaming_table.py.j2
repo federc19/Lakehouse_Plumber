@@ -205,6 +205,51 @@ dlt.create_streaming_table(
 
 # Define append flow(s)
 {% if action_metadata %}
+{% if action_metadata|length > 1 %}
+# Multiple sources - using for loop approach
+flows = [
+{% for action_meta in action_metadata %}
+    {"name": "{{ action_meta.flow_name }}", "source": "{{ action_meta.source_view }}", "once": {{ action_meta.once | string | title }}},
+{% endfor %}
+]
+
+for flow in flows:
+    def create_flow(name, source, once=False):
+        @dlt.append_flow(
+            target="{{ full_table_name }}",
+            name=name,
+            {% if once %}once=True,{% endif %}
+            comment="Append flow to {{ full_table_name }} from " + source
+        )
+        {% if expect_all %}
+        @dlt.expect_all({{ expect_all | tojson }})
+        {% endif %}
+        {% if expect_all_or_drop %}
+        @dlt.expect_all_or_drop({{ expect_all_or_drop | tojson }})
+        {% endif %}
+        {% if expect_all_or_fail %}
+        @dlt.expect_all_or_fail({{ expect_all_or_fail | tojson }})
+        {% endif %}
+        def flow_func():
+            """Streaming flow"""
+            {% if add_operational_metadata %}
+            # Add operational metadata columns
+            {% for col_name, expression in metadata_columns.items()|sort %}
+            df = df.withColumn('{{ col_name }}', {{ expression }})
+            {% endfor %}
+            {% endif %}
+            if once:
+                # One-time flow (backfill)
+                df = spark.read.table(source)
+            else:
+                # Streaming flow
+                df = spark.readStream.table(source)
+            return df
+        return flow_func
+
+    create_flow(flow["name"], flow["source"], flow["once"])
+{% else %}
+# Single source - direct append flow
 {% for action_meta in action_metadata %}
 @dlt.append_flow(
     target="{{ full_table_name }}",
@@ -240,6 +285,7 @@ def {{ action_meta.flow_name }}():
     
     return df
 {% endfor %}
+{% endif %}
 {% elif source_views %}
 {# Backward compatibility: use legacy source_views structure #}
 {% for source_view in source_views %}

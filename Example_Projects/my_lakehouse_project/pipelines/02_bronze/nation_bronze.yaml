@@ -26,8 +26,19 @@ actions:
     parameters:
       enrich_value: "enrikesidoooooo"
     target: v_nation_raw_riki
-    readMode: batch
+    readMode: stream
     description: "Load nation data using custom Python extractor"
+
+  - name: nation_raw_db_load
+    type: load
+    operational_metadata: ["_processing_timestamp"]
+    readMode: stream
+    source:
+      type: delta
+      database: "{catalog}.{raw_schema}"
+      table: nation
+    target: v_nation_raw_db
+    description: "Load nation table from raw schema"
 
   - name: write_nation_bronze
     type: write

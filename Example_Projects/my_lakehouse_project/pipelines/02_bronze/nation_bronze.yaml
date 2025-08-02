@@ -49,3 +49,12 @@ actions:
       type: streaming_table
       database: "{catalog}.{bronze_schema}"
       table: "nation"
+
+  - name: create_tracking_sink
+    type: write
+    source: v_nation_raw_riki
+    write_target:
+      type: sink
+      format: delta
+      options:
+        tableName: "{catalog}.{bronze_schema}.sinkTableForTracking"

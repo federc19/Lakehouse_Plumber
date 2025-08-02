@@ -360,6 +360,8 @@ class WriteActionValidator(BaseActionValidator):
                     errors.extend(self._validate_streaming_table(action, prefix))
                 elif write_type == WriteTargetType.MATERIALIZED_VIEW:
                     errors.extend(self._validate_materialized_view(action, prefix))
+            elif write_type == WriteTargetType.SINK:
+                errors.extend(self._validate_sink(action, prefix))
 
         except ValueError:
             pass  # Already handled above
@@ -371,11 +373,12 @@ class WriteActionValidator(BaseActionValidator):
     ) -> List[str]:
         """Validate common table requirements (database, table/name)."""
         errors = []
-        # Must have database and table/name
-        if not action.write_target.get("database"):
-            errors.append(f"{prefix}: {target_type} must have 'database'")
-        if not action.write_target.get("table") and not action.write_target.get("name"):
-            errors.append(f"{prefix}: {target_type} must have 'table' or 'name'")
+        # Must have database and table/name (except for sinks)
+        if target_type != "sink":
+            if not action.write_target.get("database"):
+                errors.append(f"{prefix}: {target_type} must have 'database'")
+            if not action.write_target.get("table") and not action.write_target.get("name"):
+                errors.append(f"{prefix}: {target_type} must have 'table' or 'name'")
         return errors
 
     def _validate_streaming_table(self, action: Action, prefix: str) -> List[str]:
@@ -411,6 +414,51 @@ class WriteActionValidator(BaseActionValidator):
             errors.append(
                 f"{prefix}: Materialized view source must be a string or list of view names"
             )
+
+        return errors
+
+    def _validate_sink(self, action: Action, prefix: str) -> List[str]:
+        """Validate sink specific requirements."""
+        errors = []
+
+        # Sink must have format specified
+        if not action.write_target.get("format"):
+            errors.append(
+                f"{prefix}: Sink must have 'format' specified in write_target (e.g., 'delta', 'kafka')"
+            )
+
+        # Sink must have options specified
+        if not action.write_target.get("options"):
+            errors.append(
+                f"{prefix}: Sink must have 'options' specified in write_target"
+            )
+
+        # Validate format is supported
+        sink_format = action.write_target.get("format")
+        if sink_format and sink_format not in ["delta", "kafka"]:
+            errors.append(
+                f"{prefix}: Sink format '{sink_format}' is not supported. Supported formats: 'delta', 'kafka'"
+            )
+
+        # Validate options for delta format
+        if sink_format == "delta":
+            options = action.write_target.get("options", {})
+            if not options.get("path") and not options.get("tableName"):
+                errors.append(
+                    f"{prefix}: Delta sink must have either 'path' or 'tableName' in options"
+                )
+
+        # Validate options for kafka format
+        if sink_format == "kafka":
+            options = action.write_target.get("options", {})
+            if not options.get("kafka.bootstrap.servers"):
+                errors.append(
+                    f"{prefix}: Kafka sink must have 'kafka.bootstrap.servers' in options"
+                )
+            if not options.get("topic"):
+                errors.append(
+                    f"{prefix}: Kafka sink must have 'topic' in options"
+                )
 
         return errors
 

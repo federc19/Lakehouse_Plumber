@@ -23,6 +23,7 @@ from ..generators.transform import (
 from ..generators.write import (
     StreamingTableWriteGenerator,
     MaterializedViewWriteGenerator,
+    SinkWriteGenerator,
 )
 
 
@@ -62,6 +63,7 @@ class ActionRegistry:
         self._write_generators = {
             WriteTargetType.STREAMING_TABLE: StreamingTableWriteGenerator,
             WriteTargetType.MATERIALIZED_VIEW: MaterializedViewWriteGenerator,
+            WriteTargetType.SINK: SinkWriteGenerator,
         }
 
     def get_generator(

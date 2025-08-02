@@ -91,3 +91,10 @@ for flow in flows:
         return flow_func
 
     create_flow(flow["name"], flow["source"], flow["once"])
+
+
+dlt.create_sink(name="write_create_tracking_sink_sink", format="delta", options={"tableName": "fed_dev_catalog.dev_bronze_schema.sinkTableForTracking"})
+
+@dlt.append_flow(name="write_create_tracking_sink_sink_append_flow", target="write_create_tracking_sink_sink")
+def write_create_tracking_sink_sink_append_flow():
+    return spark.readStream.table("v_nation_raw_riki")

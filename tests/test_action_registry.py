@@ -20,7 +20,7 @@ class TestActionRegistry:
         # Check that all generator mappings are initialized
         assert len(registry._load_generators) == 5
         assert len(registry._transform_generators) == 5
-        assert len(registry._write_generators) == 2
+        assert len(registry._write_generators) == 3
     
     def test_get_load_generator(self):
         """Test getting load generators."""

@@ -38,16 +38,28 @@
         "timestamp": "2025-08-02T13:28:37.038219"
       },
       "generated\\bronze_load\\nation_bronze.py": {
-        "checksum": "5fec16dc455c115f7e68d6b2ecf21b88ebdab311d56daed23e4af3f426522f89",
+        "checksum": "846f43f110f686cde88e5009948ed7b168f23c83f101d5311a47eaa713e54c67",
         "environment": "dev",
-        "file_composite_checksum": "e324c6ed3e688efe182543f19b7cc06bbec448aa9f8a949d535460dc299c971a",
+        "file_composite_checksum": "9bf8ee5d40397c95c9a0c3f995e04589970a2479bca6f79624db131dfb8fa2a3",
         "file_dependencies": {},
         "flowgroup": "nation_bronze",
         "generated_path": "generated\\bronze_load\\nation_bronze.py",
         "pipeline": "bronze_load",
         "source_yaml": "pipelines\\02_bronze\\nation_bronze.yaml",
-        "source_yaml_checksum": "8da24607d3443ac8e9fc0f46b572eac459d8573812a07fec04c7a3f391a0cc2e",
-        "timestamp": "2025-08-02T19:01:52.105086"
+        "source_yaml_checksum": "1c3293e9dd50e7101cfe219c1d849f4e9083a45abca63589b7b7731ccbac2ee9",
+        "timestamp": "2025-08-02T21:52:39.889321"
+      },
+      "generated\\bronze_load\\sink_examples.py": {
+        "checksum": "d7c4ac6a425463b94523ccc40b821b37a85a8b9bc5234bc34965804f6a2c8fe3",
+        "environment": "dev",
+        "file_composite_checksum": "a83162e061c856d0f6f2b454b2508bf0531e7e03eece7cc6d36f196e44e8f60e",
+        "file_dependencies": {},
+        "flowgroup": "sink_examples",
+        "generated_path": "generated\\bronze_load\\sink_examples.py",
+        "pipeline": "bronze_load",
+        "source_yaml": "pipelines\\02_bronze\\sink_examples.yaml",
+        "source_yaml_checksum": "4afae5618b5241328de20b069a8047a8a27718355b49aaefbc3d713095f84e36",
+        "timestamp": "2025-08-02T21:52:39.903101"
       },
       "generated\\bronze_load\\transformations\\__init__.py": {
         "checksum": "97919132b602270e72ad4aefe2ee5485e863f63e2fb2d1adc6c83c6ea22d26ed",
@@ -64,14 +76,14 @@
       "generated\\bronze_load\\transformations\\nation_transforms.py": {
         "checksum": "0454891b763c16fc4b1920fb4decb28ba62c38c6b4374a272331527054d8e9ec",
         "environment": "dev",
-        "file_composite_checksum": "e324c6ed3e688efe182543f19b7cc06bbec448aa9f8a949d535460dc299c971a",
+        "file_composite_checksum": "9bf8ee5d40397c95c9a0c3f995e04589970a2479bca6f79624db131dfb8fa2a3",
         "file_dependencies": {},
         "flowgroup": "nation_bronze",
         "generated_path": "generated\\bronze_load\\transformations\\nation_transforms.py",
         "pipeline": "bronze_load",
         "source_yaml": "pipelines\\02_bronze\\nation_bronze.yaml",
-        "source_yaml_checksum": "8da24607d3443ac8e9fc0f46b572eac459d8573812a07fec04c7a3f391a0cc2e",
-        "timestamp": "2025-08-02T19:01:52.064432"
+        "source_yaml_checksum": "1c3293e9dd50e7101cfe219c1d849f4e9083a45abca63589b7b7731ccbac2ee9",
+        "timestamp": "2025-08-02T21:52:39.856347"
       },
       "generated\\raw_ingestions\\functions\\__init__.py": {
         "checksum": "97919132b602270e72ad4aefe2ee5485e863f63e2fb2d1adc6c83c6ea22d26ed",
@@ -95,7 +107,7 @@
         "pipeline": "raw_ingestions",
         "source_yaml": "pipelines\\01_raw_ingestion\\custom_ingestion\\nation_ingestion.yaml",
         "source_yaml_checksum": "4236df1ed310c666a872438e667fa0916cb0a51205255af44f0aa2097dccce19",
-        "timestamp": "2025-08-02T19:01:52.130306"
+        "timestamp": "2025-08-02T21:52:39.936359"
       },
       "generated\\raw_ingestions\\nation_ingestion_custom_python.py": {
         "checksum": "c887067a1376e1cb69e3ed52c9a0d6426d7a3c4a2a2cf6bd3ae9bf5e66094d31",
@@ -107,7 +119,7 @@
         "pipeline": "raw_ingestions",
         "source_yaml": "pipelines\\01_raw_ingestion\\custom_ingestion\\nation_ingestion.yaml",
         "source_yaml_checksum": "4236df1ed310c666a872438e667fa0916cb0a51205255af44f0aa2097dccce19",
-        "timestamp": "2025-08-02T19:01:52.154155"
+        "timestamp": "2025-08-02T21:52:39.947272"
       }
     }
   },
@@ -127,6 +139,6 @@
       }
     }
   },
-  "last_updated": "2025-08-02T19:01:52.154155",
+  "last_updated": "2025-08-02T21:52:39.947272",
   "version": "1.0"
 }

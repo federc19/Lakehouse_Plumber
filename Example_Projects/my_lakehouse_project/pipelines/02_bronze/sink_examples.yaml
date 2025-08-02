@@ -1,0 +1,55 @@
+# This pipeline demonstrates different sink configurations
+# Pipeline variable puts the generate files in the same folder for the pipeline to pick up
+pipeline: bronze_load
+# Flowgroup are conceptual artifacts and has no functional purpose
+# there are used to group actions together in the generated files
+flowgroup: sink_examples
+
+actions:
+  - name: load_nation_for_sinks
+    type: load
+    operational_metadata: ["_processing_timestamp"]
+    readMode: stream
+    source:
+      type: delta
+      database: "{catalog}.{raw_schema}"
+      table: nation
+    target: v_nation_for_sinks
+    description: "Load nation table for sink examples"
+
+  - name: create_delta_sink_with_path
+    type: write
+    source: v_nation_for_sinks
+    write_target:
+      type: sink
+      format: delta
+      options:
+        path: "/path/to/my/delta/table"
+
+  - name: create_delta_sink_with_table_name
+    type: write
+    source: v_nation_for_sinks
+    write_target:
+      type: sink
+      format: delta
+      options:
+        tableName: "{catalog}.{bronze_schema}.sinkTableForTracking"
+
+  - name: create_kafka_sink
+    type: write
+    source: v_nation_for_sinks
+    write_target:
+      type: sink
+      format: kafka
+      options:
+        kafka.bootstrap.servers: "host:port"
+        topic: "my_topic"
+        checkpointLocation: "/tmp/checkpoint/kafka_sink"
+
+  - name: create_delta_sink_no_source
+    type: write
+    write_target:
+      type: sink
+      format: delta
+      options:
+        tableName: "{catalog}.{bronze_schema}.standalone_sink" 

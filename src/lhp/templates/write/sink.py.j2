@@ -1,0 +1,10 @@
+{# Sink write template #}
+{%- if sink_name and sink_format and sink_options %}
+dlt.create_sink(name="{{ sink_name }}", format="{{ sink_format }}", options={{ sink_options | to_json }})
+{%- endif %}
+
+{%- if source_view %}
+@dlt.append_flow(name="{{ sink_name }}_flow", target="{{ sink_name }}")
+def {{ sink_name }}_flow():
+    return spark.readStream.table("{{ source_view }}")
+{%- endif %} 

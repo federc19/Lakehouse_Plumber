@@ -16,7 +16,7 @@ Highlights
 * **Multi-format ingestion** – CSV, JSON, Parquet using *cloudfiles*.
 * **Bronze → Silver → Gold** layers encoded as separate pipelines.
 * **Change-Data-Feed (CDC)** enabled on streaming tables.
-* **Data-Quality Expectations** (`expectations/*.json`).
+* **Data-Quality Expectations** (`expectations/*.yaml`).
 * **Templates & Presets** to avoid repetition.
 * **Environment substitutions** for *dev*, *tst*, *prod*.
 
@@ -48,7 +48,7 @@ Customising the Example
 
 1. Edit ``substitutions/dev.yaml`` to match your catalog and storage paths.  
 2. Tweak presets under ``presets/`` (e.g., change table properties).  
-3. Adjust schema hints or expectations JSON to enforce your data contract.
+3. Adjust schema hints or expectations YAML to enforce your data contract.
 
 More Examples (Coming Soon)
 ---------------------------

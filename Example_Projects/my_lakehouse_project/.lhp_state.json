@@ -37,6 +37,18 @@
         "source_yaml_checksum": "caf8a9b92be5e1c525e342b1688aaabe6463163e61b9ee3f6ff3840413bacd61",
         "timestamp": "2025-08-02T13:28:37.038219"
       },
+      "generated\\bronze_load\\customer_bronze.py": {
+        "checksum": "f6be5adaf08d9a1118b9b7819228ac7a112def1900aa4cb12c15d2e9520375b1",
+        "environment": "dev",
+        "file_composite_checksum": "b59c028ff73172a91532c964256ed1da24d15ce82b48cf4777e3c45c6d038b5a",
+        "file_dependencies": {},
+        "flowgroup": "customer_bronze",
+        "generated_path": "generated\\bronze_load\\customer_bronze.py",
+        "pipeline": "bronze_load",
+        "source_yaml": "pipelines\\02_bronze\\customer_bronze.yaml",
+        "source_yaml_checksum": "77cfd875f01d053b74b4ad0bcfb37f646cc54e1b7c0d0c5dabd9ee6ac3f12bd5",
+        "timestamp": "2025-08-02T22:33:34.625256"
+      },
       "generated\\bronze_load\\nation_bronze.py": {
         "checksum": "846f43f110f686cde88e5009948ed7b168f23c83f101d5311a47eaa713e54c67",
         "environment": "dev",
@@ -47,19 +59,7 @@
         "pipeline": "bronze_load",
         "source_yaml": "pipelines\\02_bronze\\nation_bronze.yaml",
         "source_yaml_checksum": "1c3293e9dd50e7101cfe219c1d849f4e9083a45abca63589b7b7731ccbac2ee9",
-        "timestamp": "2025-08-02T21:52:39.889321"
-      },
-      "generated\\bronze_load\\sink_examples.py": {
-        "checksum": "d7c4ac6a425463b94523ccc40b821b37a85a8b9bc5234bc34965804f6a2c8fe3",
-        "environment": "dev",
-        "file_composite_checksum": "a83162e061c856d0f6f2b454b2508bf0531e7e03eece7cc6d36f196e44e8f60e",
-        "file_dependencies": {},
-        "flowgroup": "sink_examples",
-        "generated_path": "generated\\bronze_load\\sink_examples.py",
-        "pipeline": "bronze_load",
-        "source_yaml": "pipelines\\02_bronze\\sink_examples.yaml",
-        "source_yaml_checksum": "4afae5618b5241328de20b069a8047a8a27718355b49aaefbc3d713095f84e36",
-        "timestamp": "2025-08-02T21:52:39.903101"
+        "timestamp": "2025-08-02T22:33:34.682452"
       },
       "generated\\bronze_load\\transformations\\__init__.py": {
         "checksum": "97919132b602270e72ad4aefe2ee5485e863f63e2fb2d1adc6c83c6ea22d26ed",
@@ -83,7 +83,7 @@
         "pipeline": "bronze_load",
         "source_yaml": "pipelines\\02_bronze\\nation_bronze.yaml",
         "source_yaml_checksum": "1c3293e9dd50e7101cfe219c1d849f4e9083a45abca63589b7b7731ccbac2ee9",
-        "timestamp": "2025-08-02T21:52:39.856347"
+        "timestamp": "2025-08-02T22:33:34.637728"
       },
       "generated\\raw_ingestions\\functions\\__init__.py": {
         "checksum": "97919132b602270e72ad4aefe2ee5485e863f63e2fb2d1adc6c83c6ea22d26ed",
@@ -107,7 +107,7 @@
         "pipeline": "raw_ingestions",
         "source_yaml": "pipelines\\01_raw_ingestion\\custom_ingestion\\nation_ingestion.yaml",
         "source_yaml_checksum": "4236df1ed310c666a872438e667fa0916cb0a51205255af44f0aa2097dccce19",
-        "timestamp": "2025-08-02T21:52:39.936359"
+        "timestamp": "2025-08-02T22:33:34.727853"
       },
       "generated\\raw_ingestions\\nation_ingestion_custom_python.py": {
         "checksum": "c887067a1376e1cb69e3ed52c9a0d6426d7a3c4a2a2cf6bd3ae9bf5e66094d31",
@@ -119,7 +119,7 @@
         "pipeline": "raw_ingestions",
         "source_yaml": "pipelines\\01_raw_ingestion\\custom_ingestion\\nation_ingestion.yaml",
         "source_yaml_checksum": "4236df1ed310c666a872438e667fa0916cb0a51205255af44f0aa2097dccce19",
-        "timestamp": "2025-08-02T21:52:39.947272"
+        "timestamp": "2025-08-02T22:33:34.736653"
       }
     }
   },
@@ -139,6 +139,6 @@
       }
     }
   },
-  "last_updated": "2025-08-02T21:52:39.947272",
+  "last_updated": "2025-08-02T22:33:34.737657",
   "version": "1.0"
 }

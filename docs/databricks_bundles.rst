@@ -314,7 +314,7 @@ Initialize a new LHP project with bundle support:
    # ├── templates/                        # Custom template examples
    # │   └── standard_ingestion.yaml.tmpl # Standard ingestion template
    # ├── expectations/                     # Data quality examples
-   # │   └── customer_quality.json.tmpl   # Data quality expectations
+   # │   └── customer_quality.yaml.tmpl   # Data quality expectations
    # └── schemas/                          # Schema definitions
    #     └── customer_schema.yaml.tmpl    # Schema definition example
 

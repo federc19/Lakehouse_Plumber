@@ -423,26 +423,21 @@ template_parameters:
         project_root = self.create_project_structure(temp_project)
         
         # Create expectations file as per requirements
-        (project_root / "expectations" / "customer_quality.json").write_text(json.dumps({
-            "version": "1.0",
-            "expectations": [
-                {
-                    "name": "not_null_id",
-                    "expression": "customer_id IS NOT NULL",
-                    "failureAction": "fail"
-                },
-                {
-                    "name": "valid_email",
-                    "expression": "email RLIKE '^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$'",
-                    "failureAction": "drop"
-                },
-                {
-                    "name": "positive_amount",
-                    "expression": "amount >= 0",
-                    "failureAction": "warn"
-                }
-            ]
-        }, indent=2))
+        (project_root / "expectations" / "customer_quality.yaml").write_text("""
+version: "1.0"
+expectations:
+  - name: "not_null_id"
+    expression: "customer_id IS NOT NULL"
+    failureAction: "fail"
+  
+  - name: "valid_email"
+    expression: "email RLIKE '^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$'"
+    failureAction: "drop"
+  
+  - name: "positive_amount"
+    expression: "amount >= 0"
+    failureAction: "warn"
+""")
         
         # Create flowgroup with data quality action
         pipeline_dir = project_root / "pipelines" / "customer_quality"
@@ -465,7 +460,7 @@ actions:
     transform_type: data_quality
     source: v_customers_raw
     target: v_customers_validated
-    expectations_file: "expectations/customer_quality.json"
+    expectations_file: "expectations/customer_quality.yaml"
     
   - name: save_validated_customers
     type: write

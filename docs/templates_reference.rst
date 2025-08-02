@@ -597,7 +597,7 @@ A more advanced template supporting multiple file formats with format-specific c
        cloudFiles.schemaEvolutionMode: addNewColumns
        cloudFiles.rescuedDataColumn: "_rescued_data"
      enable_dqe: true
-     expectation_file: "expectations/user_events_quality.json"
+     expectation_file: "expectations/user_events_quality.yaml"
      partition_columns:
        - "event_date"
        - "event_type"

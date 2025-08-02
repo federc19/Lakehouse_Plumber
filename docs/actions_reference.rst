@@ -1032,45 +1032,36 @@ Data quality transform actions apply data validation rules using Databricks DLT 
       source: v_customer_bronze_cleaned
       target: v_customer_bronze_DQE
       readMode: stream  
-      expectations_file: "expectations/customer_quality.json"
+      expectations_file: "expectations/customer_quality.yaml"
       description: "Apply data quality checks to customer data"
 
-**Expectations File (expectations/customer_quality.json):**
+**Expectations File (expectations/customer_quality.yaml):**
 
-.. code-block:: json
+.. code-block:: yaml
   :linenos:
 
-  {
-    "version": "1.0",
-    "table": "customer",
-    "expectations": [
-      {
-        "name": "valid_custkey",
-        "expression": "customer_id IS NOT NULL AND customer_id > 0",
-        "failureAction": "fail"
-      },
-      {
-        "name": "valid_customer_name",
-        "expression": "name IS NOT NULL AND LENGTH(TRIM(name)) > 0",
-        "failureAction": "fail"
-      },
-      {
-        "name": "valid_phone_format",
-        "expression": "phone IS NULL OR LENGTH(phone) >= 10",
-        "failureAction": "warn"
-      },
-      {
-        "name": "valid_account_balance",
-        "expression": "account_balance IS NULL OR account_balance >= -10000",
-        "failureAction": "warn"
-      },
-      {
-        "name": "suspicious_balance",
-        "expression": "account_balance IS NULL OR account_balance < 50000",
-        "failureAction": "drop"
-      }
-    ]
-  }
+  version: "1.0"
+  table: "customer"
+  expectations:
+    - name: "valid_custkey"
+      expression: "customer_id IS NOT NULL AND customer_id > 0"
+      failureAction: "fail"
+    
+    - name: "valid_customer_name"
+      expression: "name IS NOT NULL AND LENGTH(TRIM(name)) > 0"
+      failureAction: "fail"
+    
+    - name: "valid_phone_format"
+      expression: "phone IS NULL OR LENGTH(phone) >= 10"
+      failureAction: "warn"
+    
+    - name: "valid_account_balance"
+      expression: "account_balance IS NULL OR account_balance >= -10000"
+      failureAction: "warn"
+    
+    - name: "suspicious_balance"
+      expression: "account_balance IS NULL OR account_balance < 50000"
+      failureAction: "drop"
 
 **Anatomy of a data quality transform action**
 
@@ -1098,7 +1089,7 @@ Data quality transform actions apply data validation rules using Databricks DLT 
 
 .. note::
   **File Organization**: Expectations files are typically stored in an ``expectations/`` folder.
-  JSON format allows for version control and reuse across multiple pipelines.
+  YAML format allows for version control and reuse across multiple pipelines.
 
 **The above YAML translates to the following PySpark code**
 

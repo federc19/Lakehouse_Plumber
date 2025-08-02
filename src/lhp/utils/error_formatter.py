@@ -190,7 +190,7 @@ Option 2 (Legacy - will be deprecated):
             example="""Valid path examples:
   Relative: ../sql/my_query.sql
   Absolute: /absolute/path/to/query.sql
-  From YAML: ./expectations/quality_checks.json""",
+  From YAML: ./expectations/quality_checks.yaml""",
             context={"File Path": file_path, "File Type": file_type},
         )
 

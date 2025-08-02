@@ -1,0 +1,36 @@
+{
+  "environments": {
+    "dev": {
+      "generated\\raw_ingestions\\nation_ingestion_custom_python.py": {
+        "checksum": "9508ec4adcf94d3ff1271dfd0e28ea9b9a5a603c36e2a31b29859a53cff7af91",
+        "environment": "dev",
+        "file_composite_checksum": "49954291f945b1b56d41e8e0d4fbeefdce8972e6cbe1e4c74e3d4be5f920baca",
+        "file_dependencies": {},
+        "flowgroup": "nation_ingestion_custom_python",
+        "generated_path": "generated\\raw_ingestions\\nation_ingestion_custom_python.py",
+        "pipeline": "raw_ingestions",
+        "source_yaml": "pipelines\\01_raw_ingestion\\custom_ingestion\\nation_ingestion.yaml",
+        "source_yaml_checksum": "4236df1ed310c666a872438e667fa0916cb0a51205255af44f0aa2097dccce19",
+        "timestamp": "2025-08-02T12:10:34.733447"
+      }
+    }
+  },
+  "global_dependencies": {
+    "dev": {
+      "project_config": {
+        "checksum": "577ace37c39fd9d00ad088b7f0e7ec86af182af5792f0feb40c565b756023b95",
+        "last_modified": "2025-08-02T12:02:45.917202",
+        "path": "lhp.yaml",
+        "type": "project_config"
+      },
+      "substitution_file": {
+        "checksum": "2137bb6879fced3758b62566c7e00cc0672fba99123bfaa7018d84401d1a4aaf",
+        "last_modified": "2025-08-02T12:02:45.920542",
+        "path": "substitutions\\dev.yaml",
+        "type": "substitution"
+      }
+    }
+  },
+  "last_updated": "2025-08-02T12:10:34.733447",
+  "version": "1.0"
+}
